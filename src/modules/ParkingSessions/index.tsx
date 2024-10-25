@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Card } from "components/Card";
 import { ParkingSessionsTable } from "./ParkingSessionsTable";
 import { apiDate } from "utils/date";
@@ -19,14 +19,10 @@ export function ParkingSessions() {
   const [isSessionEnded, setIsSessionEnded] = useState<string>("All");
   const [vehicleType, setVehicleType] = useState<string>("All");
 
-  useEffect(() => {
-    getParkingSessionData();
-  }, []);
-
-  const getParkingSessionData = async () => {
+  const getParkingSessionData = useCallback(async () => {
     const accessToken = await getAccessToken();
 
-    let params = new URLSearchParams({ offset, limit, sessionStartedAtFrom });
+    const params = new URLSearchParams({ offset, limit, sessionStartedAtFrom });
 
     if (isSessionEnded !== "All") {
       params.append("isSessionEnded", isSessionEnded);
@@ -38,7 +34,7 @@ export function ParkingSessions() {
     const query = params.toString();
     const data = await getParkingSessions(accessToken, query);
     setParkingSessions(data);
-  };
+  }, [sessionStartedAtFrom, isSessionEnded, sessionEndedAtTo, vehicleType]);
 
   const handleSubmit = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -46,6 +42,10 @@ export function ParkingSessions() {
     e.preventDefault();
     getParkingSessionData();
   };
+
+  useEffect(() => {
+    getParkingSessionData();
+  }, [getParkingSessionData]);
 
   return (
     <Card className="mt-12" title="Parking sessions">
