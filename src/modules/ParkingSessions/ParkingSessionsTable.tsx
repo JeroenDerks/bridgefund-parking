@@ -17,7 +17,7 @@ export function ParkingSessionsTable({
         </tr>
       </thead>
       <tbody>
-        {parkingSessions.map(
+        {parkingSessions?.map(
           (
             {
               vehicleLicensePlate,
@@ -43,5 +43,5 @@ export function ParkingSessionsTable({
 }
 
 type ParkingSessionsProps = {
-  parkingSessions: i.ParkingSession[];
+  parkingSessions?: i.ParkingSession[];
 };

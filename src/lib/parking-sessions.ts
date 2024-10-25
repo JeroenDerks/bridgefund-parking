@@ -1,17 +1,17 @@
 import { redirect } from "next/navigation";
-import { ACCESSTOKEN, ROUTES } from "utils/enums";
-import { cookies } from "next/headers";
+import { ROUTES } from "utils/enums";
 import * as i from "types";
 
-export async function getParkingSessions(): Promise<i.ParkingSession[]> {
+export async function getParkingSessions(
+  accessToken: string,
+  query?: string
+): Promise<i.ParkingSession[]> {
   try {
-    const { get } = await cookies();
-
-    const accessToken = get(ACCESSTOKEN)?.value;
-
     if (!accessToken) throw new Error("No access token available");
 
-    const url = `${process.env.API_URL}/parking/sessions/list?offset=0&limit=100`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/parking/sessions/list?${
+      query || ""
+    }`;
     const response = await fetch(url, {
       method: "GET",
       headers: {
