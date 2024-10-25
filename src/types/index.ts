@@ -1,4 +1,4 @@
-export type VehicleType = "CAR" | "MOTOR" | null;
+export type VehicleType = "CAR" | "MOTOR";
 
 export type ParkingSpace = {
   parkingSpaceId: number;

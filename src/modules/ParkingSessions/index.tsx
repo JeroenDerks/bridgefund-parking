@@ -50,7 +50,7 @@ export function ParkingSessions() {
   return (
     <Card className="mt-12" title="Parking sessions">
       <form className="flex mb-10">
-        <label htmlFor="sessionStartedAtFrom" className=" inline-block">
+        <label htmlFor="sessionStartedAtFrom" className="inline-block">
           Start:
         </label>
         <input
@@ -62,7 +62,7 @@ export function ParkingSessions() {
           value={sessionStartedAtFrom}
         />
         <div>
-          <label htmlFor="sessionEndedAtTo" className=" inline-block">
+          <label htmlFor="sessionEndedAtTo" className="inline-block">
             End:
           </label>
           <input
@@ -74,7 +74,7 @@ export function ParkingSessions() {
             value={sessionEndedAtTo}
           />
         </div>
-        <label htmlFor="isSessionEnded" className=" inline-block">
+        <label htmlFor="isSessionEnded" className="inline-block">
           Has ended:
         </label>
         <select
@@ -88,7 +88,7 @@ export function ParkingSessions() {
           <option value="true">True</option>
           <option value="false">False</option>
         </select>
-        <label htmlFor="vehicleType" className=" inline-block">
+        <label htmlFor="vehicleType" className="inline-block">
           Vehicle
         </label>
         <select
