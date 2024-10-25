@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { ACCESSTOKEN } from "./enums";
+import { ACCESSTOKEN } from "../utils/enums";
 
 export async function login(formData: FormData) {
   try {

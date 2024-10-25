@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { ACCESSTOKEN, ROUTES } from "./enums";
+import { ACCESSTOKEN, ROUTES } from "utils/enums";
 import { cookies } from "next/headers";
 import * as i from "types";
 
