@@ -1,6 +1,8 @@
-export function Card({ children }: CardProps) {
+export function Card({ children, className }: CardProps) {
   return (
-    <div className="p-4 border border-gray-500 rounded-lg bg-gray-950">
+    <div
+      className={`p-4 border border-gray-500 rounded-lg bg-gray-950 ${className}`}
+    >
       {children}
     </div>
   );
@@ -8,4 +10,5 @@ export function Card({ children }: CardProps) {
 
 type CardProps = {
   children: React.ReactNode;
+  className?: string;
 };
