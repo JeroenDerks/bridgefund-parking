@@ -19,7 +19,6 @@ export default async function Home() {
             type="email"
             name="email"
             className="block text-gray-800 px-1 mb-2"
-            defaultValue={process.env.DEFAULT_EMAIL} // TODO: Remove when done
             required
           />
           <label htmlFor="password">Password</label>
@@ -27,7 +26,6 @@ export default async function Home() {
             type="password"
             name="password"
             className="block text-gray-800 px-1 "
-            defaultValue={process.env.DEFAULT_PW} // TODO: Remove when done
             required
           />
           <SubmitButton className="w-full mt-4">Log In</SubmitButton>
