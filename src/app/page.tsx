@@ -1,6 +1,6 @@
 import { SubmitButton } from "components/SubmitButton";
 import { redirect } from "next/navigation";
-import { login } from "utils";
+import { login } from "utils/auth";
 import { ROUTES } from "utils/enums";
 
 export default async function Home() {

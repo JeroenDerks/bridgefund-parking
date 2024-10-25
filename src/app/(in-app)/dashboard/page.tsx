@@ -1,3 +1,13 @@
+import { getParkingSpaces } from "utils/parking-spaces";
+
 export default async function DashboardPage() {
-  return <>Dashboard</>;
+  const parkingSpaces = await getParkingSpaces();
+
+  return (
+    <>
+      {parkingSpaces?.map((parkingSpace) => (
+        <p>{parkingSpace.parkingSpaceId}</p>
+      ))}
+    </>
+  );
 }

@@ -4,8 +4,8 @@ export default function InAppLayout({ children }: InAppLayoutProps) {
   return (
     <>
       <Header />
-      <div className="flex flex-col justify-center py-10">
-        <div className="max-w-6xl">{children}</div>
+      <div className="flex flex-col items-center py-10">
+        <div className="max-w-4xl w-full">{children}</div>
       </div>
     </>
   );

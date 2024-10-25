@@ -1,6 +1,6 @@
 import { SubmitButton } from "components/SubmitButton";
 import { redirect } from "next/navigation";
-import { logout } from "utils";
+import { logout } from "utils/auth";
 import { ROUTES } from "utils/enums";
 
 export const Header = () => {
