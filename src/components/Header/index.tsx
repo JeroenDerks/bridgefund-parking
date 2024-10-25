@@ -11,7 +11,7 @@ export const Header = () => {
   };
 
   return (
-    <div className=" h-10 bg-gray-600 px-10 py-2 justify-between items-center flex">
+    <div className=" h-10 bg-gray-700 px-10 py-2 justify-between items-center flex">
       <h6 className="font-bold">ParkingBusiness</h6>
       <form action={handleLogout}>
         <SubmitButton>Log out</SubmitButton>

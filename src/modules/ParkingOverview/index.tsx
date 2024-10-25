@@ -6,7 +6,9 @@ import { vehicleTypeTitle } from "utils/text";
 export function ParkingOverview({ parkingSpaces }: ParkingOverviewProps) {
   return (
     <Card>
-      <h2 className="mb-4">Occupancy rate per parking space</h2>
+      <h2 className="mb-8 text-xs uppercase font-bold">
+        Occupancy rate per parking space
+      </h2>
       <div className="flex w-full justify-between">
         {parkingSpaces.map(({ vehicleType, capacity, occupancy }, index) => (
           <div key={index} className="pr-4">
@@ -23,9 +25,9 @@ export function ParkingOverview({ parkingSpaces }: ParkingOverviewProps) {
           </div>
         ))}
       </div>
-      <p className="text-xs mt-4 text-gray-400">
+      <p className="text-xs mt-8 text-gray-400">
         The rate of occupancy does not match the active parking sessions. Please
-        interpret this data carefully.
+        interpret this data cautiously.
       </p>
     </Card>
   );
