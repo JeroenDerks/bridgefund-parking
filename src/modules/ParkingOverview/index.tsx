@@ -5,10 +5,7 @@ import { vehicleTypeTitle } from "utils/text";
 
 export function ParkingOverview({ parkingSpaces }: ParkingOverviewProps) {
   return (
-    <Card>
-      <h2 className="mb-8 text-xs uppercase font-bold">
-        Occupancy rate per parking space
-      </h2>
+    <Card title="Occupancy rate per parking space">
       <div className="flex w-full justify-between">
         {parkingSpaces.map(({ vehicleType, capacity, occupancy }, index) => (
           <div key={index} className="pr-4">

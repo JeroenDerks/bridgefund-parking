@@ -3,9 +3,7 @@ import { ACCESSTOKEN, ROUTES } from "utils/enums";
 import { cookies } from "next/headers";
 import * as i from "types";
 
-export async function getParkingSessions(
-  queryParams?: string
-): Promise<i.ParkingSession[]> {
+export async function getParkingSessions(): Promise<i.ParkingSession[]> {
   try {
     const { get } = await cookies();
 
@@ -22,15 +20,13 @@ export async function getParkingSessions(
       },
     });
 
-    console.log(response);
-
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
 
     const data = await response.json();
     console.log(data);
-    return data.data?.parkingSpaces;
+    return data.data?.parkingSessions;
   } catch (error) {
     console.error("There was a problem fetching the parking sessions", error);
     redirect(ROUTES.HOME);
