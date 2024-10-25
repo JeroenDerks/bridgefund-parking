@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { Card } from "components/Card";
 import { ParkingSessionsTable } from "./ParkingSessionsTable";
-import * as i from "types";
 import { apiDate } from "utils/date";
 import { getAccessToken } from "lib/getAccessToken";
 import { getParkingSessions } from "lib/parking-sessions";
+import * as i from "types";
 
 const limit = "100";
 const offset = "0";
@@ -16,26 +16,25 @@ export function ParkingSessions() {
   const [parkingSessions, setParkingSessions] = useState<i.ParkingSession[]>();
   const [sessionEndedAtTo, setEndDate] = useState(apiDate(Date.now()));
   const [sessionStartedAtFrom, setStartDate] = useState(defaultStartDate);
+  const [isSessionEnded, setIsSessionEnded] = useState<string>();
 
   useEffect(() => {
     getParkingSessionData();
   }, []);
 
   const getParkingSessionData = async () => {
-    try {
-      const accessToken = await getAccessToken();
-      const params = new URLSearchParams({
-        offset,
-        limit,
-        sessionStartedAtFrom,
-        sessionEndedAtTo,
-      });
-      const query = params.toString();
-      const data = await getParkingSessions(accessToken, query);
-      setParkingSessions(data);
-    } catch (error) {
-      console.error("There was a problem fetching the parking sessions", error);
+    const accessToken = await getAccessToken();
+
+    let params = new URLSearchParams({ offset, limit, sessionStartedAtFrom });
+    if (isSessionEnded !== undefined) {
+      params.append("isSessionEnded", isSessionEnded);
+      if (isSessionEnded === "true") {
+        params.append("sessionEndedAtTo", sessionEndedAtTo);
+      }
     }
+    const query = params.toString();
+    const data = await getParkingSessions(accessToken, query);
+    setParkingSessions(data);
   };
 
   const handleSubmit = async (
@@ -47,27 +46,45 @@ export function ParkingSessions() {
 
   return (
     <Card className="mt-12" title="Parking sessions">
-      <form>
-        <label htmlFor="sessionStartedAtFrom" className="w-[100px]">
+      <form className="flex mb-10">
+        <label htmlFor="sessionStartedAtFrom" className=" inline-block">
           Start:
         </label>
         <input
           type="date"
           id="sessionStartedAtFrom"
           name="sessionStartedAtFrom"
-          className="text-gray-950"
+          className="text-gray-950 ml-2 mr-8"
           onChange={(e) => setStartDate(e.target.value)}
           value={sessionStartedAtFrom}
         />
-        <label htmlFor="sessionEndedAtTo">End:</label>
-        <input
-          type="date"
-          id="sessionEndedAtTo"
-          name="sessionEndedAtTo"
-          className="text-gray-950"
-          onChange={(e) => setEndDate(e.target.value)}
-          value={sessionEndedAtTo}
-        />
+        <div>
+          <label htmlFor="sessionEndedAtTo" className=" inline-block">
+            End:
+          </label>
+          <input
+            type="date"
+            id="sessionEndedAtTo"
+            name="sessionEndedAtTo"
+            className="text-gray-950 ml-2 mr-8"
+            onChange={(e) => setEndDate(e.target.value)}
+            value={sessionEndedAtTo}
+          />
+        </div>
+        <label htmlFor="isSessionEnded" className=" inline-block">
+          Has ended:
+        </label>
+        <select
+          name="isSessionEnded"
+          id="isSessionEnded"
+          className="text-gray-950 ml-2 mr-8"
+          onChange={(e) => setIsSessionEnded(e.target.value)}
+          value={isSessionEnded}
+        >
+          <option>All otions</option>
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </select>
         <button onClick={(e) => handleSubmit(e)}>Submit</button>
       </form>
       <ParkingSessionsTable {...{ parkingSessions }} />
