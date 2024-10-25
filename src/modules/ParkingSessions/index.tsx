@@ -16,7 +16,8 @@ export function ParkingSessions() {
   const [parkingSessions, setParkingSessions] = useState<i.ParkingSession[]>();
   const [sessionEndedAtTo, setEndDate] = useState(apiDate(Date.now()));
   const [sessionStartedAtFrom, setStartDate] = useState(defaultStartDate);
-  const [isSessionEnded, setIsSessionEnded] = useState<string>();
+  const [isSessionEnded, setIsSessionEnded] = useState<string>("All");
+  const [vehicleType, setVehicleType] = useState<string>("All");
 
   useEffect(() => {
     getParkingSessionData();
@@ -26,12 +27,14 @@ export function ParkingSessions() {
     const accessToken = await getAccessToken();
 
     let params = new URLSearchParams({ offset, limit, sessionStartedAtFrom });
-    if (isSessionEnded !== undefined) {
+
+    if (isSessionEnded !== "All") {
       params.append("isSessionEnded", isSessionEnded);
       if (isSessionEnded === "true") {
         params.append("sessionEndedAtTo", sessionEndedAtTo);
       }
     }
+    if (vehicleType !== "All") params.append("vehicleType", vehicleType);
     const query = params.toString();
     const data = await getParkingSessions(accessToken, query);
     setParkingSessions(data);
@@ -81,9 +84,23 @@ export function ParkingSessions() {
           onChange={(e) => setIsSessionEnded(e.target.value)}
           value={isSessionEnded}
         >
-          <option>All otions</option>
+          <option>All</option>
           <option value="true">True</option>
           <option value="false">False</option>
+        </select>
+        <label htmlFor="vehicleType" className=" inline-block">
+          Vehicle
+        </label>
+        <select
+          name="vehicleType"
+          id="vehicleType"
+          className="text-gray-950 ml-2 mr-8"
+          onChange={(e) => setVehicleType(e.target.value)}
+          value={vehicleType}
+        >
+          <option value="All">All</option>
+          <option value="CAR">Car</option>
+          <option value="MOTOR">Motor</option>
         </select>
         <button onClick={(e) => handleSubmit(e)}>Submit</button>
       </form>
