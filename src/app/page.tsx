@@ -1,3 +1,4 @@
+import { SubmitButton } from "components/SubmitButton";
 import { redirect } from "next/navigation";
 import { login } from "utils";
 import { ROUTES } from "utils/enums";
@@ -29,9 +30,7 @@ export default async function Home() {
             defaultValue={process.env.DEFAULT_PW} // TODO: Remove when done
             required
           />
-          <button type="submit" className="w-full mt-4">
-            Log In
-          </button>
+          <SubmitButton className="w-full mt-4">Log In</SubmitButton>
         </form>
       </div>
     </section>

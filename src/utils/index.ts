@@ -2,9 +2,9 @@ import { cookies } from "next/headers";
 import { ACCESSTOKEN } from "./enums";
 
 export async function login(formData: FormData) {
-  const { set } = await cookies();
-
   try {
+    const { set } = await cookies();
+
     const response = await fetch(`${process.env.API_URL}/auth/password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -29,4 +29,9 @@ export async function login(formData: FormData) {
   } catch (error) {
     console.error("There was a problem with the login request:", error);
   }
+}
+
+export async function logout() {
+  const { delete: deleteCookies } = await cookies();
+  deleteCookies(ACCESSTOKEN);
 }
