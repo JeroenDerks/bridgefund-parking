@@ -20,7 +20,7 @@ export default async function Home() {
             name="email"
             className="block text-gray-800 px-1 mb-2"
             required
-            defaultValue={process.env.DEFAULT_EMAIL}
+            defaultValue={process.env.DEFAULT_EMAIL || ""}
           />
           <label htmlFor="password">Password</label>
           <input
@@ -28,7 +28,7 @@ export default async function Home() {
             name="password"
             className="block text-gray-800 px-1 "
             required
-            defaultValue={process.env.DEFAULT_PW}
+            defaultValue={process.env.DEFAULT_PW || ""}
           />
           <SubmitButton className="w-full mt-4">Log In</SubmitButton>
         </form>

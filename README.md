@@ -28,4 +28,12 @@ If there was more time, I would work on the following:
 
 ## Questions:
 
-1. How is occupancy calculated? I don't understand how the 3 `parkingSpaces` relate to the parking sessions.
+1. How is parking space occupancy calculated?
+
+This is the data I receive while there are 19 active parking sessions.
+
+```
+[ { "parkingSpaceId": 1, "occupancy": -12, "capacity": 50 },
+  { "parkingSpaceId": 2, "occupancy": -19, "capacity": 80 },
+  { "parkingSpaceId": 3, "occupancy": -24, "capacity": 20 } ]
+```
