@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Card } from "components/Card";
-import { ParkingSessionsTable } from "./ParkingSessionsTable";
+import { ParkingSessionsTable } from "../ParkingSessionsTable";
 import { getParkingSessions } from "lib/parking-sessions";
 import * as i from "types";
 import { createParkingSessionQuery } from "utils/query";
