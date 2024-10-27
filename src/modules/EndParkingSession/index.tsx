@@ -1,3 +1,4 @@
+import { endParkingSession } from "lib/parking-sessions";
 import { useState } from "react";
 
 export const EndParkingSession = ({
@@ -5,7 +6,13 @@ export const EndParkingSession = ({
 }: EndParkingSessionProps) => {
   const [isShowingModal, setIsShowingModal] = useState(false);
 
-  const handleEndParkingSession = async () => {};
+  const handleEndParkingSession = async () => {
+    const res = await endParkingSession(parkingSessionId);
+    if (res?.status === 201) {
+      // TODO: Improve revalidation of cache
+      location.reload();
+    }
+  };
 
   return (
     <>
@@ -34,7 +41,11 @@ export const EndParkingSession = ({
             >
               Cancel
             </button>
-            <button className="bg-slate-200 border-red-500 text-red-500 border px-2">
+
+            <button
+              className="bg-slate-200 border-red-500 text-red-500 border px-2"
+              onClick={handleEndParkingSession}
+            >
               End session
             </button>
           </div>
