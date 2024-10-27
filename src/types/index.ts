@@ -18,3 +18,11 @@ export type ParkingSession = {
   vehicleLicensePlate: string;
   vehicleType: VehicleType;
 };
+
+export type ParkingSessionIsEnded = "true" | "false" | "-1";
+export type ParkingSessionFormVehicle = VehicleType | "-1";
+export type ParkingSessionFormKeys =
+  | "sessionStartedAtFrom"
+  | "sessionEndedAtTo"
+  | "isSessionEnded"
+  | "vehicleType";

@@ -1,12 +1,15 @@
 import { redirect } from "next/navigation";
 import { ROUTES } from "utils/enums";
 import * as i from "types";
+import { getAccessToken } from "./getAccessToken";
 
 export async function getParkingSessions(
   accessToken: string,
   query?: string
 ): Promise<i.ParkingSession[]> {
   try {
+    const accessToken = await getAccessToken();
+
     if (!accessToken) throw new Error("No access token available");
 
     const url = `${process.env.NEXT_PUBLIC_API_URL}/parking/sessions/list?${
