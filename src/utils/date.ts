@@ -8,9 +8,3 @@ export function formatDate(date: string) {
 
   return "";
 }
-
-export function apiDate(input: number) {
-  const dateTime = new Date(input).toISOString();
-  const date = dateTime.split("T")[0];
-  return date;
-}

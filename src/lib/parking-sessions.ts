@@ -4,7 +4,6 @@ import * as i from "types";
 import { getAccessToken } from "./getAccessToken";
 
 export async function getParkingSessions(
-  accessToken: string,
   query?: string
 ): Promise<i.ParkingSession[]> {
   try {

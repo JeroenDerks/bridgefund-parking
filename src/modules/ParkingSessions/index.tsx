@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Card } from "components/Card";
 import { ParkingSessionsTable } from "./ParkingSessionsTable";
-import { apiDate } from "utils/date";
 import { getParkingSessions } from "lib/parking-sessions";
 import * as i from "types";
 import { createParkingSessionQuery } from "utils/query";
@@ -13,11 +12,10 @@ import { SelectInput } from "components/Input/Select";
 const limit = 100;
 const offset = 0;
 const defaultStartDate = "2024-08-01";
-const defaultEndDate = apiDate(Date.now());
 
 export function ParkingSessions() {
   const [parkingSessions, setParkingSessions] = useState<i.ParkingSession[]>();
-  const [sessionEndedAtTo, setEndDate] = useState(defaultEndDate);
+  const [sessionEndedAtTo, setEndDate] = useState("");
   const [sessionStartedAtFrom, setStartDate] = useState(defaultStartDate);
   const [isSessionEnded, setIsSessionEnded] =
     useState<i.ParkingSessionIsEnded>("-1");
@@ -33,6 +31,7 @@ export function ParkingSessions() {
       isSessionEnded,
       vehicleType,
     });
+
     const data = await getParkingSessions(query);
     setParkingSessions(data);
   }, [sessionStartedAtFrom, isSessionEnded, sessionEndedAtTo, vehicleType]);
@@ -48,14 +47,10 @@ export function ParkingSessions() {
     getParkingSessionData();
   }, [getParkingSessionData]);
 
-  const handleEndDateChange = (newDate: string) => {
-    setEndDate(newDate);
-    setIsSessionEnded("true");
-  };
-
-  const handleIsEndedChange = (isEndedState: i.ParkingSessionIsEnded) => {
-    if (isEndedState === "false") setEndDate("");
-    setIsSessionEnded(isEndedState);
+  const handleIsEndedChange = (sessionState: i.ParkingSessionIsEnded) => {
+    // Prevent conflicting logic when sending enddate while sessionState === 'false'
+    if (sessionState === "false") setEndDate("");
+    setIsSessionEnded(sessionState);
   };
 
   return (
@@ -68,12 +63,11 @@ export function ParkingSessions() {
           value={sessionStartedAtFrom}
         />
         <DateInput
-          handleChange={(val) => handleEndDateChange(val)}
+          handleChange={(val) => setEndDate(val)}
           id="sessionEndedAtTo"
           label="End"
           value={sessionEndedAtTo}
         />
-
         <SelectInput
           label="Has ended:"
           id="isSessionEnded"
