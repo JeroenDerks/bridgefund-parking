@@ -1,4 +1,5 @@
 import { Card } from "components/Card";
+import { OccupancyIndicator } from "modules/OccupancyIndicator";
 import React from "react";
 import * as i from "types";
 import { vehicleTypeTitle } from "utils/text";
@@ -16,9 +17,13 @@ export function ParkingOverview({ parkingSpaces }: ParkingOverviewProps) {
               Available:{" "}
               <span className="font-bold">{capacity + occupancy}</span>
             </p>
-            <p>
+            <p className="mb-4">
               Capacity: <span className="font-bold">{capacity}</span>
             </p>
+            <OccupancyIndicator
+              capacity={capacity}
+              available={capacity + occupancy}
+            />
           </div>
         ))}
       </div>
