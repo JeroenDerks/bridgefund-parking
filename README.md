@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Welcome to the coding challenge for Jeroen Derks.
+
+The goal for this assingment was to cover all criteria and show my technical abilities. Therefore design and UX have received less attention.
+
+For full transparency, criteria PBF-04.2 is not fully inplemented. The requirement states:
+
+```
+Allow the operator to filter by the most important fields of the sessions: session type (resident, non-resident car, non-resident motorbike), start date, end date, session status (active/inactive).
+```
+
+However, the session type filtering (resident, non-resident car, non-resident motorbike) can only be done in the FE because the BE does not allow for filtering by `parkingSpaceId`. Since the backend allows for filtering by `vehicleType`, this has been implemented instead of the session type.
 
 ## Getting Started
 
-First, run the development server:
+Install the dependencies using `npm i` and run the application locally using `npm run dev`.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Next steps
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If there was more time, I would work on the following:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Add pagination to table
+2. Add loading state to parking session table
+3. Add empty state for table
+4. Add refreshing of `accessToken` when expiry date approaches
+5. Add debounce for date switching to prevent calls when month changes
+6. Fix revalidation of cached data
+7. Add UI for starting new parking sessions
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Questions:
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. How is occupancy calculated? I don't understand how the 3 `parkingSpaces` relate to the parking sessions.
