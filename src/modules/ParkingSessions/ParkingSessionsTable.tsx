@@ -1,3 +1,4 @@
+import { EndParkingSession } from "modules/EndParkingSession";
 import * as i from "types";
 import { formatDate } from "utils/date";
 import { vehicleTypeTitle } from "utils/text";
@@ -10,8 +11,6 @@ const costPerHour = {
 export function ParkingSessionsTable({
   parkingSessions,
 }: ParkingSessionsProps) {
-  console.log(parkingSessions);
-
   const calcCost = ({
     parkingSpaceId,
     sessionLengthInHoursMinutes,
@@ -44,6 +43,7 @@ export function ParkingSessionsTable({
         {parkingSessions?.map(
           (
             {
+              parkingSessionId,
               parkingSpaceId,
               sessionEndedAt,
               sessionLengthInHoursMinutes,
@@ -58,7 +58,13 @@ export function ParkingSessionsTable({
               <td>{vehicleTypeTitle(vehicleType)}</td>
               <td>{parkingSpaceId}</td>
               <td>{formatDate(sessionStartedAt)}</td>
-              <td>{formatDate(sessionEndedAt)}</td>
+              <td>
+                {!sessionEndedAt ? (
+                  <EndParkingSession {...{ parkingSessionId }} />
+                ) : (
+                  formatDate(sessionEndedAt)
+                )}
+              </td>
               <td>
                 {calcCost({
                   parkingSpaceId,

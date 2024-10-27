@@ -34,3 +34,27 @@ export async function getParkingSessions(
     redirect(ROUTES.HOME);
   }
 }
+
+export async function endParkingSession({ id }: { id: string }) {
+  try {
+    const accessToken = await getAccessToken();
+
+    if (!accessToken) throw new Error("No access token available");
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/parking/sessions/end/?${id}`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    return response.status;
+  } catch (error) {
+    console.error("There was a problem ending the parking sessions", error);
+  }
+}
