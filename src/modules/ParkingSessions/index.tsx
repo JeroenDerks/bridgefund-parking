@@ -9,7 +9,7 @@ import { createParkingSessionQuery } from "utils/query";
 import { DateInput } from "components/Input/DateInput";
 import { SelectInput } from "components/Input/Select";
 
-const limit = 100;
+const limit = 1000;
 const offset = 0;
 const defaultStartDate = "2024-08-01";
 
@@ -35,13 +35,6 @@ export function ParkingSessions() {
     const data = await getParkingSessions(query);
     setParkingSessions(data);
   }, [sessionStartedAtFrom, isSessionEnded, sessionEndedAtTo, vehicleType]);
-
-  const handleSubmit = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    getParkingSessionData();
-  };
 
   useEffect(() => {
     getParkingSessionData();
@@ -93,8 +86,6 @@ export function ParkingSessions() {
           <option value="CAR">Car</option>
           <option value="MOTOR">Motor</option>
         </SelectInput>
-
-        <button onClick={(e) => handleSubmit(e)}>Submit</button>
       </form>
       <ParkingSessionsTable {...{ parkingSessions }} />
     </Card>
